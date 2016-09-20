@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="部首" type="部首Type">
+    <xs:annotation>
+      <xs:documentation>edited with XMLSPY v5 U (http://www.xmlspy.com) by et8 (et8)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="音韻Type" mixed="true">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="號">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="①"/>
+            <xs:enumeration value="②"/>
+            <xs:enumeration value="③"/>
+            <xs:enumeration value="④"/>
+            <xs:enumeration value="⑤"/>
+            <xs:enumeration value="⑥"/>
+            <xs:enumeration value="⑦"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="音"/>
+      <xs:element type="xs:string" name="韻"/>
+    </xs:choice>
+    <xs:attribute type="xs:byte" name="number" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="返点Type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="type" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="義Type" mixed="true">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="音">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute type="xs:string" name="type" use="optional"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="返点Type" name="返点"/>
+      <xs:element type="xs:string" name="標識"/>
+    </xs:choice>
+    <xs:attribute type="xs:string" name="type" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="解Type">
+    <xs:sequence>
+      <xs:element name="號" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="①"/>
+            <xs:enumeration value="②"/>
+            <xs:enumeration value="③"/>
+            <xs:enumeration value="④"/>
+            <xs:enumeration value="⑤"/>
+            <xs:enumeration value="⑥"/>
+            <xs:enumeration value="⑦"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="義Type" name="義" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="xs:string" name="图" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:byte" name="number" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="字解Type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="音韻Type" name="音韻"/>
+      <xs:element name="字解註">
+        <xs:complexType mixed="true">
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="號">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="①"/>
+                  <xs:enumeration value="②"/>
+                  <xs:enumeration value="③"/>
+                  <xs:enumeration value="④"/>
+                  <xs:enumeration value="⑤"/>
+                  <xs:enumeration value="⑥"/>
+                  <xs:enumeration value="⑦"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element type="xs:string" name="音"/>
+            <xs:element type="xs:string" name="韻"/>
+            <xs:element name="標識">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="〔國字〕"/>
+                  <xs:enumeration value="佛"/>
+                  <xs:enumeration value="國字。"/>
+                  <xs:enumeration value="國字"/>
+                  <xs:enumeration value="（國字）"/>
+                  <xs:enumeration value="國"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:choice>
+          <xs:attribute type="xs:byte" name="number" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="解Type" name="解"/>
+      <xs:element type="同訓Type" name="同訓"/>
+      <xs:element type="解字Type" name="解字"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="熟語Type">
+    <xs:sequence>
+      <xs:element name="見出語">
+        <xs:complexType mixed="true">
+          <xs:sequence>
+            <xs:element type="返点Type" name="返点" maxOccurs="unbounded" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="xs:string" name="音" minOccurs="0"/>
+      <xs:element type="解Type" name="解"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="見出語Type" mixed="true">
+    <xs:sequence>
+      <xs:element type="返点Type" name="返点" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="漢字Type">
+    <xs:sequence>
+      <xs:element type="xs:string" name="見出字">
+        <xs:annotation>
+          <xs:documentation>切</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="字解Type" name="字解"/>
+      <xs:element type="熟語Type" name="熟語" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="筆畫Type">
+    <xs:sequence>
+      <xs:element type="xs:byte" name="畫數"/>
+      <xs:element type="漢字Type" name="漢字" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="同訓Type">
+    <xs:sequence>
+      <xs:element name="標識">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="同訓異義"/>
+            <xs:enumeration value="國訓異義"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="訓" minOccurs="0"/>
+      <xs:element type="xs:string" name="同訓字" minOccurs="0"/>
+      <xs:element type="xs:string" name="同訓解"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="解字Type" mixed="true">
+    <xs:sequence>
+      <xs:element type="xs:string" name="標識"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="部首Type">
+    <xs:sequence>
+      <xs:element type="xs:string" name="部首字"/>
+      <xs:element type="筆畫Type" name="筆畫" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="字解註Type" mixed="true">
+    <xs:sequence>
+      <xs:element name="標識">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="〔國字〕"/>
+            <xs:enumeration value="佛"/>
+            <xs:enumeration value="國字。"/>
+            <xs:enumeration value="國字"/>
+            <xs:enumeration value="（國字）"/>
+            <xs:enumeration value="國"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

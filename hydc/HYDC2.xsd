@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<!-- ？？？ -->
+	<xsd:element name="ZTM">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 字 -->
+				<xsd:element ref="ZI"/>
+				<!-- 詞 -->
+				<xsd:element ref="CI" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 字 -->
+	<xsd:element name="ZI">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 字母 -->
+				<xsd:element name="ZM" type="xsd:string"/>
+				<!-- 字母？？ -->
+				<xsd:element ref="ZMLB" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 字母？？ -->
+	<xsd:element name="ZMLB">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 序號 -->
+				<xsd:element name="XH" type="naturalNumber16"/>
+				<!-- ？？ -->
+				<xsd:element ref="YD"/>
+				<!-- ？？ -->
+				<xsd:element name="GL" type="xsd:string" minOccurs="0"/>
+				<!-- ？？釋義 -->
+				<xsd:element ref="ZMSY" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- ？？ -->
+	<xsd:element name="YD">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 拼音？？ -->
+				<xsd:element ref="PYLB" maxOccurs="unbounded"/>
+				<!-- 廣韻 -->
+				<xsd:element name="GY" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 拼音？？ -->
+	<xsd:element name="PYLB">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 拼音 -->
+				<xsd:element name="PY" type="xsd:string"/>
+				<!-- 注音 -->
+				<xsd:element name="ZY" type="xsd:string"/>
+				<!-- 讀音 -->
+				<xsd:element name="DY" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 字母釋義 -->
+	<xsd:element name="ZMSY">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 釋義？？ -->
+				<xsd:element ref="SYLB" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 釋義？？ -->
+	<xsd:element name="SYLB">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 序號 -->
+				<xsd:element name="XH" type="naturalNumber16" minOccurs="0"/>
+				<!-- 釋義 -->
+				<xsd:element name="SY" type="xsd:string"/>
+				<!-- ？？ -->
+				<xsd:element name="LZ" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 詞 -->
+	<xsd:element name="CI">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 詞母？？ -->
+				<xsd:element ref="CMLB" minOccurs="0"/>
+				<!-- 詞母 -->
+				<xsd:element ref="CM" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 詞母？？ -->
+	<xsd:element name="CMLB">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 詞母 -->
+				<xsd:element ref="CM" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 詞母 -->
+	<xsd:element name="CM">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 詞義 -->
+				<xsd:element name="CY" type="xsd:string"/>
+				<!-- ？？序號 -->
+				<xsd:element name="LJXH" type="naturalNumber16" minOccurs="0"/>
+				<!-- 詞母釋義 -->
+				<xsd:element ref="CMSY" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 詞母釋義 -->
+	<xsd:element name="CMSY">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- ？？ -->
+				<xsd:element name="GL" type="xsd:string" minOccurs="0"/>
+				<!-- 釋義？？ -->
+				<xsd:element ref="SYLB" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- 圖牌 -->
+				<xsd:element name="TP" type="xsd:string" minOccurs="0"/>
+				<!-- 圖牌？？ -->
+				<xsd:element name="TPBT" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:simpleType name="naturalNumber16">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9A-F]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

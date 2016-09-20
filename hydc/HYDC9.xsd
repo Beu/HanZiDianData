@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<!-- 詞母 -->
+	<xsd:element name="CM">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 詞義 -->
+				<xsd:element name="CY" type="xsd:string"/>
+				<!-- 詞母釋義 -->
+				<xsd:element ref="CMSY" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 詞母釋義 -->
+	<xsd:element name="CMSY">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- ？？ -->
+				<xsd:element name="GL" type="xsd:string" minOccurs="0"/>
+				<!-- 釋義？？ -->
+				<xsd:element ref="SYLB" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- 圖牌 -->
+				<xsd:element name="TP" type="xsd:string" minOccurs="0"/>
+				<!-- 圖牌？？ -->
+				<xsd:element name="TPBT" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- 釋義？？ -->
+	<xsd:element name="SYLB">
+		<xsd:complexType>
+			<xsd:sequence>
+				<!-- 序號 -->
+				<xsd:element name="XH" type="naturalNumber16" minOccurs="0"/>
+				<!-- 釋義 -->
+				<xsd:element name="SY" type="xsd:string"/>
+				<!-- ？？ -->
+				<xsd:element name="LZ" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:simpleType name="naturalNumber16">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9A-F]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>
